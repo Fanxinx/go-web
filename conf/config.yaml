@@ -2,6 +2,8 @@ app:
   name: "webapp"
   mode: "dev"
   port: 8081
+  start_time: "2021-09-01"
+  machine_id: 12
 log:
   level: "debug"
   filename: "webapp.log"
@@ -13,7 +15,7 @@ mysql:
   driver: "mysql"
   port: 3306
   user: "root"
-  password: ""
+  password: "asd456"
   db_name: "db"
   db_charset: "utf8mb4"
   db_prefix: ""

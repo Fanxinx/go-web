@@ -2,26 +2,13 @@ package mysql
 
 import (
 	"fmt"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"time"
 )
-//
-//const (
-//	DB_DRIVER	 = "mysql"
-//	DB_HOST	     = "127.0.0.1"
-//	DB_PORT	     = "3306"
-//	DB_DATABASE  = "opgg"
-//	DB_USERNAME  = "root"
-//	DB_PASSWORD  = "asd456789"
-//	DB_CHARSET   = "utf8mb4"
-//	DB_COLLATION = "utf8mb4_unicode_ci"
-//	DB_PREFIX    = "opgg_"
-//	SET_MAX_IDLE_CONNS = 20
-//	SET_MAX_OPEN_CONNS = 100
-//)
+
 var db *gorm.DB
 func Init()(err error){
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true&loc=Local&collation=%s",

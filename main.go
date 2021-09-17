@@ -15,6 +15,8 @@ import (
 	"webapp/logger"
 	"webapp/routes"
 	"webapp/settings"
+	"webapp/utils/snowflake"
+	"webapp/utils/validator"
 )
 
 // Go web 脚手架模板
@@ -25,7 +27,7 @@ func main() {
 		return
 	}
 	//2.初始化日志
-	if err := logger.Init();err != nil{
+	if err := logger.Init(viper.GetString("app.mode"));err != nil{
 		fmt.Printf("init logger failed,err:%v\n",err)
 		return
 	}
@@ -42,8 +44,11 @@ func main() {
 	defer redis.Close()
 	//5.注册路由
 	r := routes.Setup()
-
-	//6.优雅关机重启
+	//6.初始化验证翻译器
+	validator.Init("zh")
+	//7.初始化ID
+	snowflake.Init(viper.GetString("app.start_time"),viper.GetInt64("app.machine_id"))
+	//8.优雅关机重启
 	srv := &http.Server{
 		Addr:fmt.Sprintf(":%d",viper.GetInt("app.port")),
 		Handler: r,
